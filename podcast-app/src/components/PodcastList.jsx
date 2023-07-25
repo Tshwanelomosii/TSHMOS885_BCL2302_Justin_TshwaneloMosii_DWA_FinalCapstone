@@ -1,5 +1,6 @@
 // src/components/PodcastList.js
 import React, { useState, useEffect } from 'react';
+import PodcastItem from './PodCastItem';
 
 const PodcastList = () => {
   const [podcasts, setPodcasts] = useState([]);
@@ -14,15 +15,13 @@ const PodcastList = () => {
   return (
     <div>
       <h2>Podcast List</h2>
-      <ul>
+      <div className="podcast-list">
         {podcasts.map((podcast) => (
-          <li key={podcast.id}>
-            <h3>{podcast.title}</h3>
-            <img src={podcast.image} alt={podcast.title} />
-            <p>{podcast.description}</p>
-          </li>
+          <div key={podcast.id} className="podcast-item-container">
+            <PodcastItem podcast={podcast} />
+          </div>
         ))}
-      </ul>
+      </div>
     </div>
   );
 };

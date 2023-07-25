@@ -1,0 +1,25 @@
+/* src/components/PodcastItem.css */
+.podcast-item {
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+  }
+  
+  .podcast-item h3 {
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+  
+  .podcast-item img {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-top: 10px;
+  }
+  
+  .podcast-item p {
+    margin-top: 8px;
+  }
+  

@@ -1,14 +1,14 @@
-// src/App.jsx
+// src/components/App.js
 import React from 'react';
-import PodcastList from './components/podcasts';
+import PodcastList from './components/PodCastList';
 
-function App() {
+const App = () => {
   return (
     <div>
       <h1>Podcast App</h1>
       <PodcastList />
     </div>
   );
-}
+};
 
 export default App;
