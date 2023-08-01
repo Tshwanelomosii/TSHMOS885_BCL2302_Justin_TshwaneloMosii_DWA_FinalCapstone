@@ -1,6 +1,6 @@
 // src/components/PodcastItem.js
 import React from 'react';
-import './PodcastItem.css';
+import '../components/PodcastItem.css';
 
 const PodcastItem = ({ podcast }) => {
   return (

@@ -1,6 +1,7 @@
 // src/components/App.js
 import React from 'react';
-import PodcastList from './components/PodCastList';
+import PodcastList from '../src/components/PodcastList';
+
 
 const App = () => {
   return (

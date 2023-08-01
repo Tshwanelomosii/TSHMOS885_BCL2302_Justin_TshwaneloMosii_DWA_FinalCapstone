@@ -1,6 +1,7 @@
 // src/components/PodcastList.js
 import React, { useState, useEffect } from 'react';
-import PodcastItem from './PodCastItem';
+import PodcastItem from './PodcastItem';
+import  './PodcastList.css';
 
 const PodcastList = () => {
   const [podcasts, setPodcasts] = useState([]);
@@ -27,3 +28,10 @@ const PodcastList = () => {
 };
 
 export default PodcastList;
+
+
+
+
+
+
+
