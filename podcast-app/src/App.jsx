@@ -1,23 +1,46 @@
-// src/components/App.js
-import React from 'react';
-import PodcastList from '../src/components/PodcastList';
+import React, { useEffect, useState } from 'react';
+import PodcastList from './components/PodcastList';
 import Header from './components/Header';
 
-
-// App.jsx
-import '@shoelace-style/shoelace/dist/themes/light.css';
-import { setBasePath } from '@shoelace-style/shoelace/dist/utilities/base-path';
-
-setBasePath('https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.6.0/cdn/');
- 
-
-
 const App = () => {
+  const [podcasts, setPodcasts] = useState([]);
+  const [sortDirection, setSortDirection] = useState('asc');
+  const [selectedPodcast, setSelectedPodcast] = useState(null);
+  const [selectedGenre, setSelectedGenre] = useState('');
+
+  useEffect(() => {
+    fetch('https://podcast-api.netlify.app/shows')
+      .then((response) => response.json())
+      .then((data) => setPodcasts(data))
+      .catch((error) => console.error('Error fetching data:', error));
+  }, []);
+
+  const handleSort = () => {
+    setSortDirection((prevSortDirection) =>
+      prevSortDirection === 'asc' ? 'desc' : 'asc'
+    );
+  };
+
+  const handlePodcastClick = (podcast) => {
+    setSelectedPodcast(podcast);
+  };
+
+  const handleGenreChange = (event) => {
+    setSelectedGenre(event.target.value);
+  };
+
   return (
-    <div>
-      <Header />
-      <h1>Podcast App</h1>
-      <PodcastList />
+    <div className="app">
+      <Header handleSort={handleSort} sortDirection={sortDirection}
+      handleGenreChange={handleGenreChange}
+      selectedGenre={selectedGenre} />
+      <h1>News on </h1>
+      <PodcastList podcasts={podcasts} sortDirection={sortDirection} 
+      selectedGenre={selectedGenre}
+      handlePodcastClick={handlePodcastClick}/>
+      {selectedPodcast && (
+        <PodcastDetails selectedPodcast={selectedPodcast} />
+      )}
     </div>
   );
 };

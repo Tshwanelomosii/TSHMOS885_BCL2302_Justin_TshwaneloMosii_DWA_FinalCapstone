@@ -1,20 +1,48 @@
-nav ul{
+.app-header {
+    background-color: #7B6F7D;
+    padding: 10px;
     display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  nav ul {
     list-style: none;
-    gap: 20px;
-    padding: 15px;
-    margin: 10px;
-}
-
-.navbar{
-    background-color: cadetblue;
-    
-}
-
-.searchButton{
+    margin: 0;
+    padding: 0;
     display: flex;
-    gap: 20px;
-    padding: 15px;
-    justify-content: right;
-
-}
+  }
+  nav li {
+    margin-right: 15px;
+  }
+  nav a {
+    color: #60d333;
+    text-decoration: none;
+    font-size: 1.2rem;
+  }
+  nav a:hover {
+    text-decoration: underline;
+  }
+  .search-container {
+    display: flex;
+    align-items: center;
+  }
+  .search-container input {
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-right: 5px;
+  }
+  .sort-dropdown {
+    display: flex;
+    align-items: center;
+  }
+  .sort-icon {
+    margin-left: 8px;
+  }
+  
+  
+  
+  
+  
+  
+  

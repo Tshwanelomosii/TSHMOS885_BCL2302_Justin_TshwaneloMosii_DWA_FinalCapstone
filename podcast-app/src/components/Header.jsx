@@ -1,47 +1,60 @@
 import React from 'react';
-import { SlButton,SlInput,  SlDivider, SlDropdown, SlIcon, SlMenu, SlMenuItem } from '@shoelace-style/shoelace/dist/react';
 import './Header.css';
 
+const Header = ({ handleSort, sortDirection, handleSearch, handleGenreChange, selectedGenre }) => {
+  const genreMapping = {
+    1: 'Personal Growth',
+    2: 'True Crime and Investigative Journalism',
+    3: 'History',
+    4: 'Comedy',
+    5: 'Entertainment',
+    6: 'Business',
+    7: 'Fiction',
+    8: 'News',
+    9: 'Kids and Family',
+  };
 
-const Header = () => {
   return (
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#">Navbar</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Dropdown
-            </a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Action</a></li>
-              <li><a class="dropdown-item" href="#">Another action</a></li>
-              <li><hr class="dropdown-divider"/></li>
-              <li><a class="dropdown-item" href="#">Something else here</a></li>
-            </ul>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link disabled" aria-disabled="true">Disabled</a>
-          </li>
-        </ul>
-        <form class="d-flex" role="search">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
-          <button class="btn btn-outline-success" type="submit">Search</button>
-        </form>
+    <header className="app-header">
+      <nav>
+        {/* Navigation links */}
+      </nav>
+
+      <div className="search-container">
+        {/* Search input */}
+        <input
+          type="text"
+          placeholder="Search podcasts..."
+          onChange={(e) => handleSearch(e.target.value)}
+        />
+        <button type="button" className="btn btn-outline-dark">Search</button>
       </div>
-    </div>
-  </nav>
-  )
-}
+
+      {/* Sorting dropdown */}
+      <div className="sort-dropdown">
+        <select
+          id="sort"
+          value={sortDirection}
+          onChange={(e) => handleSort(e.target.value)}
+        >
+          <option value="asc">Ascending</option>
+          <option value="desc">Descending</option>
+        </select>
+      </div>
+
+      {/* Genre selection dropdown */}
+      <div className="genre-dropdown">
+        <select value={selectedGenre} onChange={handleGenreChange}>
+          <option value="">Select a Genre</option>
+          {Object.keys(genreMapping).map((genreId) => (
+            <option key={genreId} value={genreId}>
+              {genreMapping[genreId]}
+            </option>
+          ))}
+        </select>
+      </div>
+    </header>
+  );
+};
 
 export default Header;
