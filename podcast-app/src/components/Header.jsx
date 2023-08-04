@@ -1,35 +1,44 @@
-import React from 'react';
-import './Header.css';
-
-const Header = ({ handleSort, sortDirection, handleSearch, handleGenreChange, selectedGenre }) => {
+import React, { useState } from "react";
+import "./Header.css";
+const Header = ({
+  handleSort,
+  sortDirection,
+  handleSearch,
+  handleGenreChange,
+  selectedGenre,
+}) => {
+  const [searchQuery, setSearchQuery] = useState("");
   const genreMapping = {
-    1: 'Personal Growth',
-    2: 'True Crime and Investigative Journalism',
-    3: 'History',
-    4: 'Comedy',
-    5: 'Entertainment',
-    6: 'Business',
-    7: 'Fiction',
-    8: 'News',
-    9: 'Kids and Family',
+    1: "Personal Growth",
+    2: "True Crime and Investigative Journalism",
+    3: "History",
+    4: "Comedy",
+    5: "Entertainment",
+    6: "Business",
+    7: "Fiction",
+    8: "News",
+    9: "Kids and Family",
   };
-
+  const handleSearchInputChange = (event) => {
+    const query = event.target.value;
+    setSearchQuery(query);
+    handleSearch(query); // Call the handleSearch function passed from App
+  };
   return (
     <header className="app-header">
-      <nav>
-        {/* Navigation links */}
-      </nav>
-
-      <div className="search-container">
-        {/* Search input */}
+      {/* Navigation links */}
+      <nav>{/* Navigation links */}</nav>
+      {/* Search input */}
+      <div className="search-box">
         <input
+          id="input"
           type="text"
-          placeholder="Search podcasts..."
-          onChange={(e) => handleSearch(e.target.value)}
+          placeholder="Search podcasts by title..."
+          value={searchQuery}
+          onChange={handleSearchInputChange} // Handle search input change
         />
-        <button type="button" className="btn btn-outline-dark">Search</button>
+        
       </div>
-
       {/* Sorting dropdown */}
       <div className="sort-dropdown">
         <select
@@ -41,10 +50,9 @@ const Header = ({ handleSort, sortDirection, handleSearch, handleGenreChange, se
           <option value="desc">Descending</option>
         </select>
       </div>
-
       {/* Genre selection dropdown */}
       <div className="genre-dropdown">
-        <select value={selectedGenre} onChange={handleGenreChange}>
+        <select id="genre" value={selectedGenre} onChange={handleGenreChange}>
           <option value="">Select a Genre</option>
           {Object.keys(genreMapping).map((genreId) => (
             <option key={genreId} value={genreId}>
@@ -56,5 +64,4 @@ const Header = ({ handleSort, sortDirection, handleSearch, handleGenreChange, se
     </header>
   );
 };
-
 export default Header;

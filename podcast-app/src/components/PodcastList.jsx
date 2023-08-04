@@ -1,63 +1,38 @@
 import React, { useState, useEffect } from 'react';
 import PodcastItem from './PodcastItem';
 import './PodcastList.css';
-
-const PodcastList = () => {
-  const [podcasts, setPodcasts] = useState([]);
-  const [selectedGenre, setSelectedGenre] = useState(null);
-  const [sortDirection, setSortDirection] = useState('asc');
-  const [searchQuery, setSearchQuery] = useState('');
-
+const PodcastList = ({ podcasts, sortDirection, selectedGenre, searchQuery }) => {
+  const [sortedPodcasts, setSortedPodcasts] = useState([]);
   useEffect(() => {
-    // Fetch data from the API endpoint
-    fetch('https://podcast-api.netlify.app/shows')
-      .then((response) => response.json())
-      .then((data) => {
-        // Apply filtering based on selectedGenre and searchQuery
-        const filteredPodcasts = data.filter((podcast) => {
-          const genreMatch = !selectedGenre || podcast.genres.includes(parseInt(selectedGenre));
-          const titleMatch = !searchQuery || podcast.title.toLowerCase().includes(searchQuery.toLowerCase());
-          return genreMatch && titleMatch;
-        });
-
-        // Apply sorting based on sortDirection
-        const sortedPodcasts = filteredPodcasts.sort((a, b) => {
-          const titleA = a.title.toUpperCase();
-          const titleB = b.title.toUpperCase();
-          return sortDirection === 'asc' ? titleA.localeCompare(titleB) : titleB.localeCompare(titleA);
-        });
-
-        setPodcasts(sortedPodcasts);
-      });
-  }, [sortDirection, selectedGenre, searchQuery]);
-
-  const handleSearch = () => {
+    // Apply sorting
+    const sorted = [...podcasts];
+    sorted.sort((a, b) => {
+      const titleA = a.title.toLowerCase();
+      const titleB = b.title.toLowerCase();
+      if (sortDirection === 'asc') {
+        return titleA.localeCompare(titleB);
+      } else {
+        return titleB.localeCompare(titleA);
+      }
+    });
+    // Apply filtering based on selectedGenre
+    const filteredPodcasts = selectedGenre
+      ? sorted.filter((podcast) => podcast.genres.includes(parseInt(selectedGenre)))
+      : sorted;
     // Apply filtering based on searchQuery
-    // (This will trigger useEffect to update the podcast list)
-    setPodcasts(podcasts);
-  };
-
+    const searchedPodcasts = searchQuery
+      ? filteredPodcasts.filter((podcast) =>
+          podcast.title.toLowerCase().includes(searchQuery.toLowerCase())
+        )
+      : filteredPodcasts;
+    setSortedPodcasts(searchedPodcasts);
+  }, [podcasts, sortDirection, selectedGenre, searchQuery]);
   return (
-    <div>
-      <h2>Podcast List</h2>
-      <div>
-        <input
-          type="text"
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-          placeholder="Search by title..."
-        />
-        <button onClick={handleSearch}>Search</button>
-      </div>
-      <div className="podcast-list">
-        {podcasts.map((podcast) => (
-          <div key={podcast.id} className="podcast-item-container">
-            <PodcastItem podcast={podcast} />
-          </div>
-        ))}
-      </div>
+    <div className="podcast-list">
+      {sortedPodcasts.map((podcast) => (
+        <PodcastItem key={podcast.id} podcast={podcast} />
+      ))}
     </div>
   );
 };
-
 export default PodcastList;
