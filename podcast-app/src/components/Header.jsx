@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import "./Header.css";
-const Header = ({
+const Header = ({//header taking several props
   handleSort,
   sortDirection,
   handleSearch,
   handleGenreChange,
   selectedGenre,
-}) => {
+}) => {//searchQuery using states and genremapping
   const [searchQuery, setSearchQuery] = useState("");
   const genreMapping = {
     1: "Personal Growth",
@@ -19,26 +19,21 @@ const Header = ({
     8: "News",
     9: "Kids and Family",
   };
+
+  //handleSearchInputChange that is triggered when the user changes the search input. It updates the searchQuery
   const handleSearchInputChange = (event) => {
     const query = event.target.value;
     setSearchQuery(query);
     handleSearch(query); // Call the handleSearch function passed from App
   };
   return (
+    
     <header className="app-header">
-      {/* Navigation links */}
-      <nav>{/* Navigation links */}</nav>
-      {/* Search input */}
-      <div className="search-box">
-        <input
-          id="input"
-          type="text"
-          placeholder="Search podcasts by title..."
-          value={searchQuery}
-          onChange={handleSearchInputChange} // Handle search input change
-        />
-        
+      <div className="chanelName">
+        <h1>News on News</h1>
       </div>
+     
+    
       {/* Sorting dropdown */}
       <div className="sort-dropdown">
         <select
@@ -50,6 +45,19 @@ const Header = ({
           <option value="desc">Descending</option>
         </select>
       </div>
+
+      {/* Search input */}
+      <div className="search-box">
+              <input
+                id="input"
+                type="text"
+                placeholder="Search podcasts by title..."
+                value={searchQuery}
+                onChange={handleSearchInputChange} // Handle search input change
+              />
+              
+            </div>
+
       {/* Genre selection dropdown */}
       <div className="genre-dropdown">
         <select id="genre" value={selectedGenre} onChange={handleGenreChange}>
