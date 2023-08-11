@@ -13,6 +13,8 @@ const App = () => {//component initializes several state variables using the `us
   const [selectedGenre, setSelectedGenre] = useState('');
   const [searchQuery, setSearchQuery] = useState('');
 
+
+
   useEffect(() => {//The `useEffect` hook is used to fetch podcast data from the URL 
     fetch('https://podcast-api.netlify.app/shows')
       .then((response) => response.json())
@@ -34,6 +36,9 @@ const App = () => {//component initializes several state variables using the `us
   const handleSearch = (query) => {//The `handleSearch` function is defined to update the `searchQuery` state based on the search input in the `Header` component.
     setSearchQuery(query);
   };
+
+ 
+
   return (
     <div className="app"> 
 

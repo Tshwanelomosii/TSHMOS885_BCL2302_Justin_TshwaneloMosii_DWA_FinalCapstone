@@ -41,9 +41,8 @@
   bottom: 0;
   background-color: #bdb1b1;
   padding: 20px;
-  z-index: 9999; /* Ensure the overlay appears above other elements */
-  /* Add additional styles for the overlay */
-  
+  z-index: 9999;
+  /* ... (other overlay styles) */
 }
 
 /* Show the overlay when the podcast item is clicked */
@@ -51,21 +50,7 @@
   display: block;
 }
 
-/* Style the description preview */
-.description-preview {
-  display: block;
-  max-height: 80px;
-  overflow: hidden;
-}
-
-.seasons{
-  text-align: center;
-  padding: 2px;
-  border: 1px solid #838282;
-  border-radius: 4px;
-  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
-}
-
-.podcast-item:hover .overlay {
-  opacity: 1; /* Show overlay on hover */
+/* Add a class to hide the overlay when seasons are being displayed */
+.podcast-item.show-seasons .overlay {
+  display: none;
 }

@@ -6,3 +6,26 @@
     gap:20px;
 
 }
+
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #bdb1b1;
+    padding: 20px;
+    z-index: 9999;
+    /* ... (other overlay styles) */
+  }
+  
+  /* Show the overlay when the podcast item is clicked */
+  .podcast-item.show-overlay .overlay {
+    display: block;
+  }
+  
+  /* Add a class to hide the overlay when seasons are being displayed */
+  .podcast-item.show-seasons .overlay {
+    display: none;
+  }
