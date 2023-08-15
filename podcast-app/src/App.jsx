@@ -6,12 +6,13 @@ import {Carousel} from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import './carousel.css';
 
-const App = () => {//component initializes several state variables using the `useState` hook
+const App = () => {//component initializes several state variables using the `useState` hook5t
   const [podcasts, setPodcasts] = useState([]);
   const [sortDirection, setSortDirection] = useState('asc');
   const [selectedPodcast, setSelectedPodcast] = useState(null);
   const [selectedGenre, setSelectedGenre] = useState('');
   const [searchQuery, setSearchQuery] = useState('');
+  
 
 
 
