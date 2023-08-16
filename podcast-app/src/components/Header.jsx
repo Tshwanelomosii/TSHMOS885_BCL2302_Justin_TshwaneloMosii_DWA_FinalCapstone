@@ -1,75 +1,59 @@
-import React, { useState } from "react";
-import "./Header.css";
-const Header = ({//header taking several props
-  handleSort,
-  sortDirection,
-  handleSearch,
-  handleGenreChange,
-  selectedGenre,
-}) => {//searchQuery using states and genremapping
-  const [searchQuery, setSearchQuery] = useState("");
-  const genreMapping = {
-    1: "Personal Growth",
-    2: "True Crime and Investigative Journalism",
-    3: "History",
-    4: "Comedy",
-    5: "Entertainment",
-    6: "Business",
-    7: "Fiction",
-    8: "News",
-    9: "Kids and Family",
+import { useState, useEffect } from 'react';
+import SearchAndSort from './SearchAndSort';
+import './Header.css'
+
+
+
+const Header = ({ searchQuery, handleSearchChange, sortBy, handleSortChange }) => {
+  const [niceTime, setNiceTime] = useState('');
+  const [showAbout, setShowAbout] = useState(false); // State to control About visibility
+
+  // Function to get the current date and time in a nice format
+  const getNiceTime = () => {
+    const date = new Date();
+    const hours = date.getHours();
+    const minutes = date.getMinutes();
+    const ampm = hours >= 12 ? 'PM' : 'AM';
+    const niceHours = hours % 12 || 12;
+    const niceMinutes = minutes.toString().padStart(2, '0');
+    const month = date.toLocaleString('default', { month: 'short' });
+    const day = date.getDate();
+    const year = date.getFullYear();
+    return `${month} ${day}, ${year} - ${niceHours}:${niceMinutes} ${ampm}`;
   };
 
-  //handleSearchInputChange that is triggered when the user changes the search input. It updates the searchQuery
-  const handleSearchInputChange = (event) => {
-    const query = event.target.value;
-    setSearchQuery(query);
-    handleSearch(query); // Call the handleSearch function passed from App
+  const toggleAbout = () => {
+    setShowAbout(!showAbout);
   };
+
+  // Update the niceTime state every minute to keep the time up-to-date
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setNiceTime(getNiceTime());
+    }, 60000); // 60000 milliseconds = 1 minute
+
+    // Clean up the interval when the component unmounts
+    return () => clearInterval(intervalId);
+  }, []);
+
   return (
-    
-    <header className="app-header">
-      <div className="chanelName">
-        <h1>News on News</h1>
-      </div>
-     
-    
-      {/* Sorting dropdown */}
-      <div className="sort-dropdown">
-        <select
-          id="sort"
-          value={sortDirection}
-          onChange={(e) => handleSort(e.target.value)}
-        >
-          <option value="asc">Ascending</option>
-          <option value="desc">Descending</option>
-        </select>
-      </div>
+    <header className='tlhogo'>
 
-      {/* Search input */}
-      <div className="search-box">
-              <input
-                id="input"
-                type="text"
-                placeholder="Search podcasts by title..."
-                value={searchQuery}
-                onChange={handleSearchInputChange} // Handle search input change
-              />
-              
-            </div>
-
-      {/* Genre selection dropdown */}
-      <div className="genre-dropdown">
-        <select id="genre" value={selectedGenre} onChange={handleGenreChange}>
-          <option value="">Select a Genre</option>
-          {Object.keys(genreMapping).map((genreId) => (
-            <option key={genreId} value={genreId}>
-              {genreMapping[genreId]}
-            </option>
-          ))}
-        </select>
-      </div>
+      <nav className='search'>
+        <div className="nice-time">
+          {niceTime}
+        </div>
+        <SearchAndSort
+// Pass the niceTime prop to the SearchAndSort component
+          searchQuery={searchQuery}
+          handleSearchChange={handleSearchChange}
+          sortBy={sortBy}
+          handleSortChange={handleSortChange}
+        />
+      </nav>
+      {showAbout && <About />} {/* Conditionally render the About component */}
     </header>
   );
 };
+
 export default Header;

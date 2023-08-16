@@ -1,12 +1,4 @@
-.podcast-item {
-  margin-bottom: 20px;
-  padding: 10px;
-  border: 1px solid #838282;
-  border-radius: 4px;
-  box-shadow: 0 8px 8px rgba(0, 0, 0, 0.1);
-  cursor: pointer; /* Add pointer cursor to indicate interactivity */
-  position: relative; /* Add relative positioning for the description */
-}
+
 
 .podcast-item h3 {
   display: none; /* Hide the title by default */
@@ -53,4 +45,4 @@
 /* Add a class to hide the overlay when seasons are being displayed */
 .podcast-item.show-seasons .overlay {
   display: none;
-}
+} 

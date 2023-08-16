@@ -1,32 +1,330 @@
-/* src/components/PodcastList.css */
+.podcast-container {
+  max-width: 1600px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: start;
+  align-items: center;
+}
 
-.podcast-list{
-    display:flex;
-    flex-wrap:wrap;
-    
-    gap:20px;
+.photo{
+  width: 250px;
+}
+
+.favorite-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  width: 100%;
+}
+
+.preview-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  list-style: none;
+  padding: 0;
+  padding-top: 180px;
+  justify-content: center; /* Horizontally center the preview items */
+}
+
+.preview-item {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 
 }
 
-.overlay {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: #bdb1b1;
-    padding: 20px;
-    z-index: 9999;
-    /* ... (other overlay styles) */
-  }
+.preview-image {
+  width: 100%;
+  height: 350px;
+  object-fit: cover;
+  transition: transform 0.4s ease-in-out;
+  transform: scale(0.94);
+  border-radius: 4px;
   
-  /* Show the overlay when the podcast item is clicked */
-  .podcast-item.show-overlay .overlay {
-    display: block;
-  }
+}
+
+.preview-image:hover{
+  transform: scale(1);
+  cursor: pointer;
+}
+
+.preview-item:hover  {
+  transform: translateZ(60px) rotateY(-25deg);
+  transform: scale(0.9)
+}
+
+.preview-item:hover  {
+  transform: scale(1.02)
+}
+
+.preview-details {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.preview-description {
+  max-height: 150px; /* Adjust this value as needed */
+  overflow-y: auto;
+}
+
+
+.preview-details h3 {
+  margin: 0;
+  font-size: 16px;
+  color: #ffffff;
+}
+
+.preview-details p {
+  margin: 0;
+  color: #ffffff;
+}
+
+
+
+.show-data {
+  margin-top: 40px;
+  flex: 1; /* Take up available space in the container */
+}
+
+.show-data h2  {
+  margin-bottom: 10px;
+  color: white;
+}
+
+.show-data p {
+  color: #ffffff;
+}
+
+
+body {
+  background: linear-gradient(90deg, #325b6a 1.18%, #082738 100%);
+}
+
+
+
+
+
+/* Add or modify existing styles as needed */
+
+.tlhogo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  margin: 0;
+  width: 1600px; /* Take full viewport width */
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: rgb(0, 65, 61); 
+  z-index: 1000;
+}
+
+.dihome a {
+  position: relative;
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.dihome a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 100%;
+  height: 3px;
+  background: rgb(5, 161, 175);
+  border-radius: 5px;
+  transform-origin: right;
+  transform: scaleX(0);
+  transition: transform 0.5s;
+}
+
+.dihome {
+  display: flex;
+  justify-content: end;
   
-  /* Add a class to hide the overlay when seasons are being displayed */
-  .podcast-item.show-seasons .overlay {
-    display: none;
+}
+
+.dihome a{
+  padding: 3px;
+}
+
+.dihome button{
+text-align: center;
+justify-content: center;
+width: 90px;
+}
+
+.dihome a:hover::after {
+  transform-origin: left;
+  transform: scaleX(1);
+}
+
+.sidebar h2 {
+  color: #ffffff;
+}
+
+.search-sort-container {
+  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Input and Select Styles */
+.search-sort-container input[type="text"] {
+  background-color: #ffffffa7;
+  padding: 8px; /* Increase the input's padding for larger size */
+  font-size: 16px; /* Increase the input's font size for larger size */
+  width: 250px; /* Adjust the input's width as needed */
+  border-radius: 10px;
+}
+
+.search-sort-container select {
+  background-color: #ffffffa7;
+  padding: 1px; /* Increase the select's padding for larger size */
+  font-size: 15px; /* Increase the select's font size for larger size */
+  width: 180px; /* Adjust the select's width as needed */
+  height: 30px;
+  border-radius: 10px;
+}
+
+
+/* Media Query - Increase input and select sizes for larger screens */
+@media (min-width: 1200px) {
+  .search-sort-container input[type="text"] {
+    padding: 15px; /* Increase the input's padding for larger screens */
+    font-size:18px; /* Increase the input's font size for larger screens */
+    width: 300px; /* Adjust the input's width as needed */
   }
+
+  .search-sort-container select {
+    padding: 15px; /* Increase the select's padding for larger screens */
+    font-size: 18px; /* Increase the select's font size for larger screens */
+    width:200px; /* Adjust the select's width as needed */
+    color: #000000;
+    height: 54px;
+  }
+  .dihome a{
+    font-size: x-large;
+    padding: 8px;
+  }
+
+  .dihome {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .dihome button{
+    font-size: x-large;
+    font-family: 'Times New Roman', Times, serif;
+  }
+}
+
+
+@keyframes KOLO {
+  to { filter: hue-rotate(135deg);}
+}
+
+.seas{
+  width: 300px;
+}
+
+.show-data{
+  width: 180px;
+}
+
+.seas-data-container{
+  color: white;
+  max-width: 1600px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.seas-data-container button{
+  width: 180px;
+}
+
+.load{
+  padding-left: 30%;
+  padding-top: 30%;
+  font-size: x-large;
+  color: #ffffff;
+}
+
+.nice-time{
+  color: #aaaaaa;
+  font-size: larger;
+  background-color: transparent;
+  width: fit-content;
+
+  border-radius: 5px;
+  padding-bottom: 50px;
+}
+
+.senka{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.infos{
+  color: aliceblue;
+}
+
+.about-container{
+  color: #ffffff;
+  font-size: x-small
+};
+
+.favorites-list {
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+}
+
+.favorite-episodes,
+.favorite-shows {
+  color: white;
+  margin: 10px; /* Optional: Add some margin between the sections */
+}
+
+
+
+
+
+.carousel-container {
+  max-width: 100%; 
+  margin: 0 auto;
+}
+
+
+.carousel-slide {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+/* Style the carousel images */
+.carousel-slide img {
+  max-width: 800px;
+  max-height: 400px;
+}
+
+/* Hide the carousel dots */
+.carousel .thumbs-wrapper {
+  display: none;
+}
