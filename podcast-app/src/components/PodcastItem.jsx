@@ -256,7 +256,7 @@ const PodcastItem = ({ podcast }) => {
           className={`podcast-item ${showOverlay ? "show-overlay" : ""} ${selectedSeason !== null ? "show-seasons" : ""}`}
           onClick={handleToggleOverlay}
         >
-          
+                {loading && <p>Loading...</p>}
       
           <h3>{podcast.title}</h3>
           <img
